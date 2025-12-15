@@ -133,7 +133,8 @@ class VersionsCommand extends SubCommand {
             return;
         }
 
-        builder.append("Installed Addons: ").color(ChatColor.GRAY).append("(" + addons.size() + ")").color(ChatColor.DARK_GRAY);
+        builder.append("Installed Addons: ").color(ChatColor.GRAY).append("(" + addons.size() + ")")
+                .color(ChatColor.DARK_GRAY);
 
         for (Plugin plugin : addons) {
             String version = plugin.getDescription().getVersion();
@@ -148,7 +149,8 @@ class VersionsCommand extends SubCommand {
                 secondaryColor = ChatColor.DARK_GREEN;
                 String authors = String.join(", ", plugin.getDescription().getAuthors());
 
-                if (plugin instanceof SlimefunAddon addon && addon.getBugTrackerURL() != null) {
+                if (plugin instanceof SlimefunAddon addon && addon.getBugTrackerURL() != null
+                        && isValidUrl(addon.getBugTrackerURL())) {
                     // @formatter:off
                     hoverEvent = new HoverEvent(HoverEvent.Action.SHOW_TEXT, new Text(new ComponentBuilder()
                         .append("Author(s): ")
@@ -175,7 +177,8 @@ class VersionsCommand extends SubCommand {
                 primaryColor = ChatColor.RED;
                 secondaryColor = ChatColor.DARK_RED;
 
-                if (plugin instanceof SlimefunAddon addon && addon.getBugTrackerURL() != null) {
+                if (plugin instanceof SlimefunAddon addon && addon.getBugTrackerURL() != null
+                        && isValidUrl(addon.getBugTrackerURL())) {
                     // @formatter:off
                     hoverEvent = new HoverEvent(HoverEvent.Action.SHOW_TEXT, new Text(new ComponentBuilder()
                         .append("This plugin is disabled.\nCheck the console for an error message.")
@@ -186,11 +189,10 @@ class VersionsCommand extends SubCommand {
                     ));
                     // @formatter:on
 
-                    if (addon.getBugTrackerURL() != null) {
-                        clickEvent = new ClickEvent(ClickEvent.Action.OPEN_URL, addon.getBugTrackerURL());
-                    }
+                    clickEvent = new ClickEvent(ClickEvent.Action.OPEN_URL, addon.getBugTrackerURL());
                 } else {
-                    hoverEvent = new HoverEvent(HoverEvent.Action.SHOW_TEXT, new Text("Plugin is disabled. Check the console for an error and report on their issues tracker."));
+                    hoverEvent = new HoverEvent(HoverEvent.Action.SHOW_TEXT, new Text(
+                            "Plugin is disabled. Check the console for an error and report on their issues tracker."));
                 }
             }
 
@@ -207,5 +209,19 @@ class VersionsCommand extends SubCommand {
                 .event((HoverEvent) null);
             // @formatter:on
         }
+    }
+
+    /**
+     * Validates if a URL is properly formatted for use in chat click events.
+     * Paper 1.21+ has stricter URL validation in chat components.
+     * 
+     * @param url The URL to validate
+     * @return true if the URL is valid, false otherwise
+     */
+    private boolean isValidUrl(String url) {
+        if (url == null || url.isEmpty()) {
+            return false;
+        }
+        return url.startsWith("http://") || url.startsWith("https://");
     }
 }

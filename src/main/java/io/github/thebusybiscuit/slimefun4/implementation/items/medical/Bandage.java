@@ -19,7 +19,8 @@ import io.github.thebusybiscuit.slimefun4.implementation.items.SimpleSlimefunIte
 import io.github.thebusybiscuit.slimefun4.utils.compatibility.VersionedPotionEffectType;
 
 /**
- * A {@link Bandage} or Rag is a medical supply which heals the {@link Player} and extinguishes
+ * A {@link Bandage} or Rag is a medical supply which heals the {@link Player}
+ * and extinguishes
  * fire.
  * 
  * @author TheBusyBiscuit
@@ -30,7 +31,8 @@ public class Bandage extends SimpleSlimefunItem<ItemUseHandler> {
     private final int healingLevel;
 
     @ParametersAreNonnullByDefault
-    public Bandage(ItemGroup itemGroup, SlimefunItemStack item, RecipeType recipeType, ItemStack[] recipe, ItemStack recipeOutput, int healingLevel) {
+    public Bandage(ItemGroup itemGroup, SlimefunItemStack item, RecipeType recipeType, ItemStack[] recipe,
+            ItemStack recipeOutput, int healingLevel) {
         super(itemGroup, item, recipeType, recipe, recipeOutput);
 
         this.healingLevel = healingLevel;
@@ -42,7 +44,7 @@ public class Bandage extends SimpleSlimefunItem<ItemUseHandler> {
             Player p = e.getPlayer();
 
             // Player is neither burning nor injured
-            if (p.getFireTicks() <= 0 && p.getHealth() >= p.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue()) {
+            if (p.getFireTicks() <= 0 && p.getHealth() >= p.getAttribute(Attribute.MAX_HEALTH).getValue()) {
                 return;
             }
 

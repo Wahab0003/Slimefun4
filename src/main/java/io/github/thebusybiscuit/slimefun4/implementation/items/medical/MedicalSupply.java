@@ -26,7 +26,8 @@ public abstract class MedicalSupply<T extends ItemHandler> extends SimpleSlimefu
     private final int healAmount;
 
     @ParametersAreNonnullByDefault
-    protected MedicalSupply(ItemGroup itemGroup, int healAmount, SlimefunItemStack item, RecipeType recipeType, ItemStack[] recipe) {
+    protected MedicalSupply(ItemGroup itemGroup, int healAmount, SlimefunItemStack item, RecipeType recipeType,
+            ItemStack[] recipe) {
         super(itemGroup, item, recipeType, recipe);
 
         this.healAmount = healAmount;
@@ -42,7 +43,8 @@ public abstract class MedicalSupply<T extends ItemHandler> extends SimpleSlimefu
     }
 
     /**
-     * This returns the {@link PotionEffect PotionEffects} cured from this {@link MedicalSupply}.
+     * This returns the {@link PotionEffect PotionEffects} cured from this
+     * {@link MedicalSupply}.
      * 
      * @return An immutable {@link Set} of cured {@link PotionEffect PotionEffects}
      */
@@ -52,10 +54,11 @@ public abstract class MedicalSupply<T extends ItemHandler> extends SimpleSlimefu
     }
 
     /**
-     * This method clears any negative {@link PotionEffect} from the given {@link LivingEntity}.
+     * This method clears any negative {@link PotionEffect} from the given
+     * {@link LivingEntity}.
      * 
      * @param n
-     *            The {@link LivingEntity} to clear the effects from.
+     *          The {@link LivingEntity} to clear the effects from.
      */
     public void clearNegativeEffects(@Nonnull LivingEntity n) {
         for (PotionEffectType effect : curedEffects) {
@@ -66,14 +69,15 @@ public abstract class MedicalSupply<T extends ItemHandler> extends SimpleSlimefu
     }
 
     /**
-     * This method heals the given {@link LivingEntity} by the amount provided via the constructor.
+     * This method heals the given {@link LivingEntity} by the amount provided via
+     * the constructor.
      * 
      * @param n
-     *            The {@link LivingEntity} to heal
+     *          The {@link LivingEntity} to heal
      */
     public void heal(@Nonnull LivingEntity n) {
         double health = n.getHealth() + healAmount;
-        double maxHealth = n.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue();
+        double maxHealth = n.getAttribute(Attribute.MAX_HEALTH).getValue();
         n.setHealth(Math.min(health, maxHealth));
     }
 

@@ -20,7 +20,8 @@ import io.github.thebusybiscuit.slimefun4.core.services.sounds.SoundEffect;
 import io.github.thebusybiscuit.slimefun4.implementation.items.SimpleSlimefunItem;
 
 /**
- * The {@link VampireBlade} is a weapon that applies a Healing effect to any {@link Player}
+ * The {@link VampireBlade} is a weapon that applies a Healing effect to any
+ * {@link Player}
  * who damages another {@link LivingEntity} with this sword.
  * 
  * @author TheBusyBiscuit
@@ -45,14 +46,15 @@ public class VampireBlade extends SimpleSlimefunItem<WeaponUseHandler> {
             if (ThreadLocalRandom.current().nextInt(100) < getChance()) {
                 SoundEffect.VAMPIRE_BLADE_HEALING_SOUND.playFor(p);
                 double health = p.getHealth() + HEALING_AMOUNT;
-                double maxHealth = p.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue();
+                double maxHealth = p.getAttribute(Attribute.MAX_HEALTH).getValue();
                 p.setHealth(Math.min(health, maxHealth));
             }
         };
     }
 
     /**
-     * This method returns the chance of a {@link VampireBlade} to apply its healing effect.
+     * This method returns the chance of a {@link VampireBlade} to apply its healing
+     * effect.
      * 
      * @return The chance for a healing effect
      */

@@ -21,7 +21,8 @@ import io.github.thebusybiscuit.slimefun4.utils.compatibility.VersionedPotionEff
 public class Splint extends SimpleSlimefunItem<ItemUseHandler> {
 
     @ParametersAreNonnullByDefault
-    public Splint(ItemGroup itemGroup, SlimefunItemStack item, RecipeType recipeType, ItemStack[] recipe, ItemStack recipeOutput) {
+    public Splint(ItemGroup itemGroup, SlimefunItemStack item, RecipeType recipeType, ItemStack[] recipe,
+            ItemStack recipeOutput) {
         super(itemGroup, item, recipeType, recipe, recipeOutput);
     }
 
@@ -31,7 +32,7 @@ public class Splint extends SimpleSlimefunItem<ItemUseHandler> {
             Player p = e.getPlayer();
 
             // Player is neither burning nor injured
-            if (p.getFireTicks() <= 0 && p.getHealth() >= p.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue()) {
+            if (p.getFireTicks() <= 0 && p.getHealth() >= p.getAttribute(Attribute.MAX_HEALTH).getValue()) {
                 return;
             }
 
