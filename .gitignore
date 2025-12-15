@@ -16,6 +16,3 @@ dependency-reduced-pom.xml
 *.iml
 *.bak
 .DS_Store
-
-# AI Instructions (local only)
-FULL_SF_FIXING_INSTRUCTION.md
